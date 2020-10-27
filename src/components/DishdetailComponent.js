@@ -31,7 +31,8 @@ class DishDetail  extends Component{
                     <ul className="list-unstyled">
                         {comment.map(c => {
                             return(
-                                <li key={c.id}>{c.comment} <br /> --{c.author}, {c.date} </li>
+                            <li key={c.id}>{c.comment} <br /> --{c.author}, 
+                            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(c.date)))}</li>
                             );}
                          )}
                     </ul>
@@ -43,14 +44,16 @@ class DishDetail  extends Component{
     }
 
     render(){
-        if(this.props.selectedDish != null){
+        if(this.props.dish != null){
             return(
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(this.props.selectedDish)}
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(this.props.selectedDish.comments)} 
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderDish(this.props.dish)}
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderComments(this.props.dish.comments)} 
+                        </div>
                     </div>
                 </div>
             );
@@ -58,7 +61,6 @@ class DishDetail  extends Component{
         else{
             return(<div></div>);
         }
-
     }
 }
 export default DishDetail;
